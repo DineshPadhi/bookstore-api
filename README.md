@@ -1,1 +1,1 @@
-# rental-api
+# bookstore-api

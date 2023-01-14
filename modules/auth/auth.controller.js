@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const knex = require('../../config/knex')
 const jwt = require('jsonwebtoken')
 const User = require('../../models/user.model')
@@ -9,8 +9,6 @@ async function login(req, res) {
     const password = req.body.password
 
     let user = await User.findOne({email: email})
-
-    console.log(user)
 
     if(!user) {
         res.send({
