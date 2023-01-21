@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema({
     depth: { type: Number },
     isbn_13: { type: String, required: true },
     isbn_10: { type: String, required: true },
-    language: {
+    bookLanguage: {
         type: String,
         enum : ['english','marathi', 'hindi'],
         required: true
@@ -69,6 +69,20 @@ bookSchema.statics.getBooks = (binding, sortby, isCount=false, limit, skip) => {
     }
 
     return query
+}
+
+bookSchema.statics.search = (searchText, limit) => {
+
+    const searchRegex = new RegExp(searchText, 'i')
+
+    return Book.find({
+        $or: [
+            { "name":{ $regex : searchRegex } },
+            { "author":{ $regex : searchRegex } },
+            { "publisher":{ $regex : searchRegex } },
+            { "isbn_13":{ $regex : searchRegex } }
+        ]
+    }).limit(limit)
 }
 
 const Book = mongoose.model('Book', bookSchema)

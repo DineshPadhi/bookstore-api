@@ -1,4 +1,5 @@
 const Book = require("../../models/book.model")
+const moment = require('moment')
 
 async function getBooks(req, res) {
 
@@ -35,6 +36,21 @@ async function getBookByISBN13(req, res) {
         }
     })
 
+}
+
+async function searchBooks(req, res) {
+
+    const limit = req.query.limit || 10
+    const searchText = req.query.search || ''
+
+    const books = await Book.search(searchText, limit)
+
+    res.send({
+        error: false,
+        data: {
+            books
+        }
+    })
 }
 
 async function getFilters(req, res) {
@@ -80,5 +96,12 @@ async function getFilters(req, res) {
 module.exports = {
     getBooks,
     getBookByISBN13,
+    searchBooks,
     getFilters
 }
+
+// let bookList = require('./books.json')
+// bookList.books.forEach(book => {
+//     book.released_date = new Date(moment(book.released_date, 'DD/MM/YYYY').format('YYYY-MM-DD'))
+//     Book.create(book).then(() => console.log('book created'))
+// });

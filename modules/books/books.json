@@ -15,7 +15,7 @@
             "depth": 25,
             "isbn_13": "9781501110368",
             "isbn_10": "1501110365",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/368/9781501110368.jpg"
         },
@@ -32,7 +32,7 @@
             "width": "139 mm",
             "isbn_13": "9789390166268",
             "isbn_10": "9390166268",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": false,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/268/9789390166268.jpg"
         },
@@ -48,7 +48,7 @@
             "width": "127 mm",
             "isbn_13": "9788172345662",
             "isbn_10": "8172345666",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/662/9788172345662.jpg"
         },
@@ -66,7 +66,7 @@
             "weight": "212 gr",
             "isbn_13": "9781612680194",
             "isbn_10": "1612680194",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/194/9781612680194.jpg"
         },
@@ -80,7 +80,7 @@
             "no_of_pages": 48,
             "isbn_13": "9789391924294",
             "isbn_10": "9391924298",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": false,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/294/9789391924294.jpg"
         },
@@ -98,7 +98,7 @@
             "weight": "288 gr",
             "isbn_13": "9789391165482",
             "isbn_10": "9391165486",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/482/9789391165482.jpg"
         },
@@ -116,7 +116,7 @@
             "weight": "288 gr",
             "isbn_13": "9788195407279",
             "isbn_10": "8195407277",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/279/9788195407279.jpg"
         },
@@ -134,7 +134,7 @@
             "weight": "288 gr",
             "isbn_13": "9789384564193",
             "isbn_10": "9384564192",
-            "language": "english",
+            "bookLanguage": "english",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/193/9789384564193.jpg"
         },
@@ -152,7 +152,7 @@
             "weight": "288 gr",
             "isbn_13": "9789354600517",
             "isbn_10": "9354600514",
-            "language": "hindi",
+            "bookLanguage": "hindi",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/517/9789354600517.jpg"
         },
@@ -170,7 +170,7 @@
             "weight": "288 gr",
             "isbn_13": "9789352833726",
             "isbn_10": "9352833724",
-            "language": "hindi",
+            "bookLanguage": "hindi",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/726/9789352833726.jpg"
         },
@@ -188,7 +188,7 @@
             "weight": "288 gr",
             "isbn_13": "9788179918777",
             "isbn_10": "8179918777",
-            "language": "marathi",
+            "bookLanguage": "marathi",
             "returnable": true,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/777/9788179918777.jpg"
         },
@@ -206,7 +206,7 @@
             "weight": "288 gr",
             "isbn_13": "9781983926891",
             "isbn_10": "1983926892",
-            "language": "marathi",
+            "bookLanguage": "marathi",
             "returnable": false,
             "img_url": "https://d2g9wbak88g7ch.cloudfront.net/productimages/images200/891/9781983926891.jpg"
         }
