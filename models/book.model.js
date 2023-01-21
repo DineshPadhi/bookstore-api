@@ -29,6 +29,48 @@ const bookSchema = new mongoose.Schema({
     collation: { locale: 'en_US', strength: 1 },
     usePushEach: true,
     timestamps : {createdAt: 'created_at', updatedAt: 'updated_at'}
-},)
+}
+)
 
-module.exports = mongoose.model('Book', bookSchema)
+bookSchema.options.toJSON = {
+    transform: function(doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+    }
+};
+
+bookSchema.statics.getBooks = (binding, sortby, isCount=false, limit, skip) => {
+    let query = Book.find()
+    query.where({visibility: true})
+    if(binding.length > 0) {
+        query.where('binding').in(binding)
+    }
+
+    if(!isCount) {
+        query.limit(limit)
+        query.skip(skip)
+    }
+
+    if(sortby) {
+        if(sortby === 'price_low_to_high')
+            query.sort({price: 1})
+        if(sortby === 'price_high_to_low')
+            query.sort({price: -1})
+        if(sortby === 'discount_low_to_high')
+            query.sort({discount: 1})
+        if(sortby === 'discount_high_to_low')
+            query.sort({discount: -1})
+    }
+
+    if(isCount) {
+        query.count()
+    }
+
+    return query
+}
+
+const Book = mongoose.model('Book', bookSchema)
+
+module.exports = Book

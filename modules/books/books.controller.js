@@ -2,11 +2,20 @@ const Book = require("../../models/book.model")
 
 async function getBooks(req, res) {
 
-    const books = await Book.find({visibility: true})
+    const limit = req.query.limit || 2
+    const page = Math.max(0, req.query.page - 1)
+    const skip = limit * page
+
+    let binding = req.query.binding ? req.query.binding.split(',') : []
+    let sortby = req.query.sortby
+
+    const books = await Book.getBooks(binding, sortby, false, limit, skip)
+    const totalBooks = await Book.getBooks(binding, sortby, true)
 
     res.send({
         error: false,
         data: {
+            totalBooks,
             books
         }
     })
