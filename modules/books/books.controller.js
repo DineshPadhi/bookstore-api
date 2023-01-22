@@ -3,7 +3,7 @@ const moment = require('moment')
 
 async function getBooks(req, res) {
 
-    const limit = req.query.limit || 2
+    const limit = req.query.limit || 20
     const page = Math.max(0, req.query.page - 1)
     const skip = limit * page
 
