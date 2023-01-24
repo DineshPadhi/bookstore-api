@@ -41,6 +41,10 @@ bookSchema.options.toJSON = {
     }
 };
 
+bookSchema.statics.getBooksByIds = (bookIds = []) => {
+    return Book.find({_id: { $in: bookIds }})
+}
+
 bookSchema.statics.getBooks = (binding, sortby, isCount=false, limit, skip) => {
     let query = Book.find()
     query.where({visibility: true})
