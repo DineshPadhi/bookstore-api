@@ -23,6 +23,7 @@ async function getOrders(req, res) {
         userId: userId,
         status: { $in: ["INITIATED", "CONFIRMED"] }
     })
+    .sort({created_at: -1})
 
     res.send({
         error: false,
