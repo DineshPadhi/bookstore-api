@@ -8,7 +8,7 @@ async function cancelledOldOrders() {
 
     let orders = await OrderModel.find({ 
         status: 'INITIATED',
-        created_at: { // 16 minutes ago (from now)
+        created_at: { // 20 minutes ago (from now)
             $lt: new Date().getTime()-(20*60*1000)
         }
     })
