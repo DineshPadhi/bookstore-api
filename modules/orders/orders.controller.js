@@ -2,6 +2,8 @@ const BookModel = require('../../models/book.model')
 const OrderModel = require("../../models/order.model")
 const ObjectId = require('mongoose').Types.ObjectId;
 const uniqid = require('uniqid');
+const Razorpay = require('razorpay');
+const moment = require('moment')
 
 function isValidObjectId(id){
      
@@ -15,6 +17,19 @@ function isValidObjectId(id){
 
 async function getOrders(req, res) {
 
+    const userId = req.user.id
+    
+    let orders = await OrderModel.find({
+        userId: userId,
+        status: { $in: ["INITIATED", "CONFIRMED"] }
+    })
+
+    res.send({
+        error: false,
+        data: {
+            orders: orders
+        }
+    })
 }
 
 async function initOrder(req, res) {
@@ -56,6 +71,8 @@ async function initOrder(req, res) {
         bookDetails.push({
             bookId: book.id,
             price: book.price,
+            name: book.name,
+            img_url: book.img_url,
             quantity
         })
     })
@@ -64,18 +81,55 @@ async function initOrder(req, res) {
         orderId,
         userId,
         bookDetails,
-        totalPrice
+        totalPrice,
+        status: 'INITIATED'
     }
 
     let order = await OrderModel.create(orderDetails)
-    
-    res.send({
-        error: false,
-        message: "Order Initiated",
-        data: {
-            order
-        }
-    })
+
+    var instance = new Razorpay({ key_id: 'rzp_test_b8VuDoBtxUzl2U', key_secret: 'rOUCi9EWknJ8dnRa032zppcY' })
+
+    const expiredTime = Math.floor(Date.now() / 1000) + (16 * 60);
+    const callbackUrl = `http://localhost:3001/my-orders`
+
+    try {
+        const paymentLink = await instance.paymentLink.create({
+            amount: order.totalPrice * 100,
+            currency: "INR",
+            accept_partial: false,
+            description: "Books purchase",
+            customer: {
+              name: "Tejas Desai",
+              email: "tejasdesai0531@gmail.com",
+              contact: "+918652801993"
+            },
+            notify: {
+              sms: false,
+              email: false
+            },
+            reminder_enable: false,
+            notes: {
+              orderId: order.orderId
+            },
+            callback_url: callbackUrl,
+            callback_method: "get",
+            expire_by: expiredTime
+        })
+        
+        res.send({
+            error: false,
+            message: "Order Initiated",
+            data: {
+                paymentLink: paymentLink.short_url,
+                callbackUrl
+            }
+        })
+    } catch (error) {
+        res.send({
+            error: true,
+            message: error,
+        })
+    }
 }
 
 

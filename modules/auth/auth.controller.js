@@ -40,8 +40,13 @@ async function login(req, res) {
 
     res.send({
         error: false,
-        token: userJwt,
-        message: "Login successfull"
+        message: "Login successfull",
+        data: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            token: userJwt
+        }
     })
 
 }
@@ -50,6 +55,8 @@ async function signup(req, res) {
 
     const email = req.body.email
     const password = req.body.password
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
 
     let user = await User.findOne({email: email})
 
@@ -64,15 +71,31 @@ async function signup(req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     let newUser = {
+        firstName,
+        lastName,
         email,
         password: hashedPassword
     }
 
-    await User.create(newUser)
+    const savedUser = await User.create(newUser)
+
+    const userJwt = jwt.sign(
+        {
+          id: savedUser.id,
+          email: savedUser.email,
+        },
+        "secret"
+    );
 
     res.send({
         error: false,
-        message: "Account created successfully"
+        message: "Account created successfully",
+        data: {
+            firstName: savedUser.firstName,
+            lastName: savedUser.lastName,
+            email: savedUser.email,
+            token: userJwt
+        }
     })
 }
 

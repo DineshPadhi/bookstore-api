@@ -14,3 +14,4 @@ mongoose.connect(config.DB_URL)
     console.log(err)
   })
 
+

@@ -7,6 +7,14 @@ var bookDetailsSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
+    img_url: {
+        type: String,
+        required: true
+    },
     price: {
         type: Number,
         required: true
@@ -26,6 +34,11 @@ const orderSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    status: {
+        type: String,
+        enum : ['INITIATED','CONFIRMED', 'CANCELLED'],
+        default: 'OTHER'
     },
     bookDetails: [bookDetailsSchema],
     totalPrice: {
