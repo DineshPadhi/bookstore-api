@@ -37,6 +37,7 @@ async function initOrder(req, res) {
 
     const userId = req.user.id
     const books = req.body.books
+    const callbackUrl = req.body.callbackUrl || `http://localhost:3001/my-orders`
 
     let bookIds = []
     for(book of books) {
@@ -91,7 +92,6 @@ async function initOrder(req, res) {
     var instance = new Razorpay({ key_id: 'rzp_test_b8VuDoBtxUzl2U', key_secret: 'rOUCi9EWknJ8dnRa032zppcY' })
 
     const expiredTime = Math.floor(Date.now() / 1000) + (16 * 60);
-    const callbackUrl = `http://localhost:3001/my-orders`
 
     try {
         const paymentLink = await instance.paymentLink.create({
